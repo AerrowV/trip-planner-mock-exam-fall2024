@@ -126,7 +126,7 @@ Using `PUT` indicates that we are **updating an existing resource** — in this 
 
 ### JSON error responses
 - When trying to get or delete a trip by ID and it doesn’t exist, a structured JSON error is returned.
-- This is handled using `ApiException`.
+- This is handled using `ApiRuntimeException`.
 
 **Examples:**
 ```json

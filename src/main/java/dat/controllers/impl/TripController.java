@@ -10,6 +10,7 @@ import dat.dtos.PackingItemDTO;
 import dat.dtos.TripDTO;
 import dat.entities.enums.TripCategory;
 import dat.exceptions.ApiException;
+import dat.exceptions.ApiRuntimeException;
 import dat.services.PackingService;
 import io.javalin.http.Context;
 import jakarta.persistence.EntityManagerFactory;
@@ -37,7 +38,7 @@ public class TripController implements IController<TripDTO, Integer> {
 
         TripDTO dto = tripDao.getById(id);
         if (dto == null) {
-            throw new ApiException(404, "Trip with ID " + id + " not found");
+            throw new ApiRuntimeException(404, "Trip with ID " + id + " not found");
         }
 
         var packingItems = PackingService.getPackingItems(dto.getCategory());
@@ -73,7 +74,7 @@ public class TripController implements IController<TripDTO, Integer> {
             TripDTO updated = tripDao.update(id, tripDTO);
             ctx.status(200).json(updated);
         } catch (Exception e) {
-            throw new ApiException(404, "Trip with ID " + id + " not found for update");
+            throw new ApiRuntimeException(404, "Trip with ID " + id + " not found for update");
         }
     }
 
@@ -87,7 +88,7 @@ public class TripController implements IController<TripDTO, Integer> {
             tripDao.delete(id);
             ctx.status(204);
         } catch (Exception e) {
-            throw new ApiException(404, "Trip with ID " + id + " not found for deletion");
+            throw new ApiRuntimeException(404, "Trip with ID " + id + " not found for deletion");
         }
     }
 
@@ -99,7 +100,7 @@ public class TripController implements IController<TripDTO, Integer> {
             tripDao.addGuideToTrip(tripId, guideId);
             ctx.status(204);
         } catch (Exception e) {
-            throw new ApiException(404, "Could not assign guide. Trip ID " + tripId + " or Guide ID " + guideId + " not found");
+            throw new ApiRuntimeException(404, "Could not assign guide. Trip ID " + tripId + " or Guide ID " + guideId + " not found");
         }
     }
 
@@ -128,7 +129,7 @@ public class TripController implements IController<TripDTO, Integer> {
             List<TripDTO> result = tripDao.getTripsByCategory(category);
             ctx.status(200).json(result);
         } catch (IllegalArgumentException e) {
-            throw new ApiException(400, "Invalid category: " + ctx.pathParam("category"));
+            throw new ApiRuntimeException(400, "Invalid category: " + ctx.pathParam("category"));
         }
     }
 
@@ -151,7 +152,7 @@ public class TripController implements IController<TripDTO, Integer> {
         TripDTO dto = tripDao.getById(tripId);
 
         if (dto == null) {
-            throw new ApiException(404, "Trip with ID " + tripId + " not found");
+            throw new ApiRuntimeException(404, "Trip with ID " + tripId + " not found");
         }
 
         List<PackingItemDTO> packingItems = PackingService.getPackingItems(dto.getCategory());
@@ -168,7 +169,7 @@ public class TripController implements IController<TripDTO, Integer> {
         TripDTO dto = tripDao.getById(tripId);
 
         if (dto == null) {
-            throw new ApiException(404, "Trip with ID " + tripId + " not found");
+            throw new ApiRuntimeException(404, "Trip with ID " + tripId + " not found");
         }
 
         int totalWeight = PackingService.getPackingItems(dto.getCategory())

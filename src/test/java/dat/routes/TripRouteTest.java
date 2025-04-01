@@ -3,7 +3,6 @@ package dat.routes;
 import dat.config.ApplicationConfig;
 import dat.config.HibernateConfig;
 import dat.config.Populator;
-import dat.entities.enums.TripCategory;
 import io.javalin.Javalin;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
