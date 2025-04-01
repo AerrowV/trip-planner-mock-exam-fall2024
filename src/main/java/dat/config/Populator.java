@@ -15,9 +15,9 @@ public class Populator {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
-        Guide guide1 = new Guide("Lars", "Wanderlust", "alice@trips.com", "12345678", 7);
-        Guide guide2 = new Guide("Bob", "Trailblazer", "bob@adventures.com", "87654321", 5);
-        Guide guide3 = new Guide("Denice", "Explorer", "charlie@nature.com", "55555555", 10);
+        Guide guide1 = new Guide("Lars", "Sten", "alice@trips.com", "12345678", 7);
+        Guide guide2 = new Guide("Bobby", "San", "bob@adventures.com", "87654321", 5);
+        Guide guide3 = new Guide("Denice", "Shithead", "charlie@nature.com", "55555555", 10);
 
         em.persist(guide1);
         em.persist(guide2);

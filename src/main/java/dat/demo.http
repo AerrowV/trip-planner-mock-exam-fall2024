@@ -1,0 +1,66 @@
+### 1. Populate the DB
+POST http://localhost:7070/api/trips/populate
+
+### 2. Get all trips
+GET http://localhost:7070/api/trips
+
+### 3. Get a single trip by ID
+GET http://localhost:7070/api/trips/1
+
+### 4. Create a new trip
+POST http://localhost:7070/api/trips
+Content-Type: application/json
+
+{
+  "name": "Volcano Trek",
+  "price": 700.0,
+  "startPosition": "15.1234,-90.1234",
+  "startTime": "2025-06-15T09:00:00",
+  "endTime": "2025-06-20T17:00:00",
+  "category": "FOREST",
+  "guideId": 1
+}
+
+### 5. Update an existing trip
+PUT http://localhost:7070/api/trips/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Updated Volcano Trek",
+  "price": 799.0,
+  "startPosition": "15.1234,-90.1234",
+  "startTime": "2025-06-15T09:00:00",
+  "endTime": "2025-06-20T17:00:00",
+  "category": "FOREST",
+  "guideId": 1
+}
+
+### 6. Add a guide to a trip
+PUT http://localhost:7070/api/trips/2/guides/1
+
+### 7. Delete a trip
+DELETE http://localhost:7070/api/trips/3
+
+### 8. GET /trips/9999 (Test for getting non-existent trip ID)
+GET http://localhost:7070/api/trips/9999
+
+### 9. DELETE /trips/9999 (Test for deleting non-existent trip ID)
+DELETE http://localhost:7070/api/trips/9999
+
+### 10. GET trips by category
+GET http://localhost:7070/api/trips/category/FOREST
+
+### 11. GET Total trip price for a specific guide
+GET http://localhost:7070/api/trips/guides/1/totalprice
+
+### 12. GET total trip price for all guides
+GET http://localhost:7070/api/trips/guides/totalprice
+
+### 13. GET Packing list for trip
+GET http://localhost:7070/api/trips/packinglist/1
+
+### 14. GET weight for trip
+GET http://localhost:7070/api/trips/packinglist/1/weight
+
+

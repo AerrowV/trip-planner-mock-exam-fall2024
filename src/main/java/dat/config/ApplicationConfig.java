@@ -1,6 +1,5 @@
 package dat.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import dat.exceptions.ApiException;
 import dat.routes.Routes;
 import dat.utils.Utils;

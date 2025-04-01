@@ -2,10 +2,12 @@ package dat.daos.impl;
 
 import dat.daos.IDAO;
 import dat.daos.ITripGuideDAO;
+import dat.dtos.GuideTotalDTO;
 import dat.dtos.TripDTO;
 import dat.entities.Guide;
 import dat.entities.Trip;
-import dat.services.TripMapper;
+import dat.entities.enums.TripCategory;
+import dat.services.mappers.TripMapper;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;
@@ -83,9 +85,9 @@ public class TripDAO implements IDAO<TripDTO, Integer>, ITripGuideDAO {
             em.getTransaction().begin();
             trip.setName(dto.getName());
             trip.setPrice(dto.getPrice());
-            trip.setStartPosition(dto.getStartposition());
-            trip.setStartTime(dto.getStarttime());
-            trip.setEndTime(dto.getEndtime());
+            trip.setStartPosition(dto.getStartPosition());
+            trip.setStartTime(dto.getStartTime());
+            trip.setEndTime(dto.getEndTime());
             trip.setCategory(dto.getCategory());
             trip.setGuide(guide);
             em.getTransaction().commit();
@@ -149,4 +151,49 @@ public class TripDAO implements IDAO<TripDTO, Integer>, ITripGuideDAO {
             em.close();
         }
     }
+
+    public List<TripDTO> getTripsByCategory(TripCategory category) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            List<Trip> trips = em.createQuery("SELECT t FROM Trip t WHERE t.category = :category", Trip.class)
+                    .setParameter("category", category)
+                    .getResultList();
+            return trips.stream().map(TripMapper::toDTO).toList();
+        } finally {
+            em.close();
+        }
+    }
+
+    public double getTotalPriceByGuide(int guideId) {
+        EntityManager em = emf.createEntityManager();
+        try {
+            List<Trip> trips = em.createQuery("SELECT t FROM Trip t WHERE t.guide.id = :guideId", Trip.class)
+                    .setParameter("guideId", guideId)
+                    .getResultList();
+            return trips.stream().mapToDouble(Trip::getPrice).sum();
+        } finally {
+            em.close();
+        }
+    }
+
+    public List<GuideTotalDTO> getGuideTripTotals() {
+        EntityManager em = emf.createEntityManager();
+        try {
+            List<Guide> guides = em.createQuery("SELECT g FROM Guide g", Guide.class).getResultList();
+
+            return guides.stream().map(guide -> {
+                double total = guide.getTrips().stream()
+                        .mapToDouble(Trip::getPrice)
+                        .sum();
+                return new GuideTotalDTO(
+                        guide.getId(),
+                        guide.getFirstname() + " " + guide.getLastname(),
+                        total
+                );
+            }).toList();
+        } finally {
+            em.close();
+        }
+    }
+
 }

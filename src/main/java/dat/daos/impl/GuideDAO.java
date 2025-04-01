@@ -3,7 +3,7 @@ package dat.daos.impl;
 import dat.daos.IDAO;
 import dat.dtos.GuideDTO;
 import dat.entities.Guide;
-import dat.services.GuideMapper;
+import dat.services.mappers.GuideMapper;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.NoResultException;

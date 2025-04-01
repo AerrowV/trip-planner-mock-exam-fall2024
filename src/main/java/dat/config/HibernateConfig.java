@@ -1,7 +1,8 @@
 package dat.config;
 
 
-import dat.entities.*;
+import dat.entities.Guide;
+import dat.entities.Trip;
 import dat.utils.Utils;
 import jakarta.persistence.EntityManagerFactory;
 import org.hibernate.SessionFactory;
@@ -40,12 +41,8 @@ public class HibernateConfig {
     }
 
     private static void getAnnotationConfiguration(Configuration configuration) {
-        configuration.addAnnotatedClass(Game.class);
-        configuration.addAnnotatedClass(Gun.class);
-        configuration.addAnnotatedClass(Map.class);
-        configuration.addAnnotatedClass(Role.class);
-        configuration.addAnnotatedClass(Strategy.class);
-        configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Trip.class);
+        configuration.addAnnotatedClass(Guide.class);
     }
 
     private static EntityManagerFactory createEMF(boolean forTest) {

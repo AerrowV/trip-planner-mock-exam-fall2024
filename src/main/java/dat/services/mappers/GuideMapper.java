@@ -1,4 +1,4 @@
-package dat.services;
+package dat.services.mappers;
 
 import dat.dtos.GuideDTO;
 import dat.entities.Guide;

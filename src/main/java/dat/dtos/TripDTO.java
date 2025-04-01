@@ -10,19 +10,23 @@ public class TripDTO {
     public int id;
     public String name;
     public double price;
-    public String startposition;
-    public LocalDateTime starttime;
-    public LocalDateTime endtime;
+    public String startPosition;
+    public LocalDateTime startTime;
+    public LocalDateTime endTime;
     public TripCategory category;
     public Integer guideId;
+    private String guideName;
 
-    public TripDTO(int id, String name, double price, String startposition, LocalDateTime starttime, LocalDateTime endtime, TripCategory category, Integer integer) {
+    public TripDTO() {
+    }
+
+    public TripDTO(int id, String name, double price, String startPosition, LocalDateTime startTime, LocalDateTime endTime, TripCategory category, Integer integer) {
         this.id = id;
         this.name = name;
         this.price = price;
-        this.startposition = startposition;
-        this.starttime = starttime;
-        this.endtime = endtime;
+        this.startPosition = startPosition;
+        this.startTime = startTime;
+        this.endTime = endTime;
         this.category = category;
         this.guideId = integer;
     }

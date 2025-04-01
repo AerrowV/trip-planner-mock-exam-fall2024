@@ -11,13 +11,18 @@ public class TripRoute {
 
     public EndpointGroup getRoutes() {
         return () -> {
-            get("/populate", tripController::populate);
+            post("/populate", tripController::populate);
             get("/", tripController::readAll);
             get("/{id}", tripController::read);
             post("/", tripController::create);
             put("/{id}", tripController::update);
             delete("/{id}", tripController::delete);
             put("/{tripId}/guides/{guideId}", tripController::addGuideToTrip);
+            get("/category/{category}", tripController::getTripsByCategory);
+            get("/guides/{guideId}/totalprice", tripController::getTotalPriceForGuide);
+            get("/guides/totalprice", tripController::getTotalPerGuide);
+            get("/packinglist/{tripId}", tripController::getPackingList);
+            get("/packinglist/{tripId}/weight", tripController::getTotalPackingWeight);
         };
     }
 }
