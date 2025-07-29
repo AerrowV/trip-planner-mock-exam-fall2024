@@ -1,4 +1,4 @@
-# Trip Planning API – Backend Exam Fall 2024
+# Trip Planner API – Mock Backend Exam (Fall 2024)
 
 This project is a backend application for managing guided trips. It is built using **Java**, **Javalin**, **Hibernate (JPA)**, and **PostgreSQL**. The system allows for creation, modification, assignment, and retrieval of trips and guides.
 ## Task 1: Setup
@@ -295,13 +295,15 @@ Each of the following endpoints is covered:
 All assertions include status code and body field validation using Hamcrest matchers.
 
 ### 7.5 Trip by ID includes Packing Items
+
 Verified in the test for `GET /trips/{id}`:
+
 ```json
 {
   "trip": {
     "id": 1,
     "name": "Beach Paradise",
-    ...
+    "...": "..."
   },
   "packingItems": [
     {
@@ -309,7 +311,11 @@ Verified in the test for `GET /trips/{id}`:
       "weightInGrams": 200,
       "quantity": 1
     },
-    ...
+    {
+      "name": "Beach Towel",
+      "weightInGrams": 500,
+      "quantity": 1
+    }
   ]
 }
 ```
