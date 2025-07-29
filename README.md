@@ -237,18 +237,6 @@ GET /api/trips/packinglist/{tripId}
 ```
 Uses the trip’s category to fetch external packing items.
 
-### 6.3 Packing items included in trip response
-```http
-GET /api/trips/{id}
-```
-Response includes:
-```json
-{
-  "trip": { ... },
-  "packingItems": [ ... ]
-}
-```
-
 ### 6.4 Total packing weight endpoint
 ```http
 GET /api/trips/packinglist/{tripId}/weight
